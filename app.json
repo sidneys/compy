@@ -1,0 +1,82 @@
+{
+    "name": "Compy",
+    "description": "Compy is an HTTP/HTTPS forward proxy with content compression/transcoding capabilities.",
+    "repository": "https://github.com/barnacs/compy",
+    "website": "https://github.com/barnacs/compy",
+    "keywords": [
+        "bandwidth turbo",
+        "proxy",
+        "compression",
+        "data saver"
+    ],
+    "stack": "heroku-16",
+    "buildpacks": [
+        {
+            "url": "heroku/go"
+        },
+        {
+            "url": "https://github.com/heroku/heroku-buildpack-apt"
+        }
+    ],
+    "env": {
+        "USER": {
+            "description": "Proxy username",
+            "required": false
+        },
+        "PASS": {
+            "description": "Proxy password",
+            "required": false
+        },
+        "HOST": {
+            "description": "Proxy listen <host:port>",
+            "value": ":9999",
+            "required": false
+        },
+        "CERT": {
+            "description": "proxy certificate file path",
+            "required": false
+        },
+        "KEY": {
+            "description": "proxy certificate key file path",
+            "required": false
+        },
+        "CA": {
+            "description": "Certificate authority file path",
+            "required": false
+        },
+        "CAKEY": {
+            "description": "Certificate authority key file path",
+            "required": false
+        },
+        "BROTLI": {
+            "description": "Brotli compression level (0-11)",
+            "value": "6",
+            "required": false
+        },
+        "JPEG": {
+            "description": "JPEG quality (1-100, 0 to disable)",
+            "value": "50",
+            "required": false
+        },
+        "GIF": {
+            "description": "Transcode GIFs into static images",
+            "value": "true",
+            "required": false
+        },
+        "GZIP": {
+            "description": "GZip compression level (0-9)",
+            "value": "6",
+            "required": false
+        },
+        "PNG": {
+            "description": "Transcode PNG",
+            "value": "true",
+            "required": false
+        },
+        "MINIFY": {
+            "description": "Minify CSS/HTML/JS - Warning: Tends to break the Web",
+            "value": "false",
+            "required": false
+        }
+    }
+}
