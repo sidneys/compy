@@ -13,7 +13,8 @@ import (
 )
 
 var (
-	host  = flag.String("host", ":9999", "<host:port>")
+	host  = flag.String("host", "", "proxy listen host")
+	port  = flag.String("port", "9999", "proxy listen port")
 	cert  = flag.String("cert", "", "proxy cert path")
 	key   = flag.String("key", "", "proxy cert key path")
 	ca    = flag.String("ca", "", "CA path")
@@ -32,7 +33,11 @@ var (
 func main() {
 	flag.Parse()
 
-	p := proxy.New(*host, *cert)
+	// Assemble Proxy URL
+	url := host + ":" + port
+
+	// Create Proxy
+	p := proxy.New(*url, *cert)
 
 	if (*ca == "") != (*caKey == "") {
 		log.Fatalln("must specify both CA certificate and key")
@@ -90,13 +95,13 @@ func main() {
 		}
 	}()
 
-	log.Printf("compy listening on %s", *host)
+	log.Printf("compy listening on %s", *url)
 
 	var err error
 	if *cert != "" {
-		err = p.StartTLS(*host, *cert, *key)
+		err = p.StartTLS(*url, *cert, *key)
 	} else {
-		err = p.Start(*host)
+		err = p.Start(*url)
 	}
 	log.Fatalln(err)
 }

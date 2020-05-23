@@ -27,9 +27,14 @@
             "description": "Proxy password",
             "required": false
         },
+        "PORT": {
+            "description": "Proxy listen port",
+            "value": "9999",
+            "required": false
+        },
         "HOST": {
-            "description": "Proxy listen <host:port>",
-            "value": ":9999",
+            "description": "Proxy listen host",
+            "value": "",
             "required": false
         },
         "CERT": {
