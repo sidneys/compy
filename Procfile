@@ -1,1 +1,1 @@
-web: go/bin/compy
+web: compy
