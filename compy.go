@@ -13,14 +13,14 @@ import (
 )
 
 var (
-	host  = flag.String("host", "", "proxy listen host")
-	port  = flag.String("port", "9999", "proxy listen port")
-	cert  = flag.String("cert", "", "proxy cert path")
-	key   = flag.String("key", "", "proxy cert key path")
-	ca    = flag.String("ca", "", "CA path")
-	caKey = flag.String("cakey", "", "CA key path")
-	user  = flag.String("user", "", "proxy user name")
-	pass  = flag.String("pass", "", "proxy password")
+	host     = flag.String("host", "", "proxy listen host")
+	port     = flag.String("port", "9999", "proxy listen port")
+	cert     = flag.String("cert", "", "proxy cert path")
+	key      = flag.String("key", "", "proxy cert key path")
+	ca       = flag.String("ca", "", "CA path")
+	caKey    = flag.String("cakey", "", "CA key path")
+	username = flag.String("username", "", "proxy username")
+	password = flag.String("password", "", "proxy password")
 
 	brotli = flag.Int("brotli", 6, "Brotli compression level (0-11)")
 	jpeg   = flag.Int("jpeg", 50, "jpeg quality (1-100, 0 to disable)")
@@ -34,7 +34,8 @@ func main() {
 	flag.Parse()
 
 	// Assemble Proxy URL
-	url := host + ":" + port
+	url := new(string)
+	*url = fmt.Sprintf("%s:%s", *host, *port)
 
 	// Create Proxy
 	p := proxy.New(*url, *cert)
@@ -54,10 +55,10 @@ func main() {
 	}
 
 	// TODO: require cert and key?
-	if (*user == "") != (*pass == "") {
-		log.Fatalln("must specify both user and pass")
+	if (*username == "") != (*password == "") {
+		log.Fatalln("must specify both username and password")
 	} else {
-		p.SetAuthentication(*user, *pass)
+		p.SetAuthentication(*username, *password)
 	}
 
 	if *jpeg != 0 {

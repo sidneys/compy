@@ -19,11 +19,11 @@
         }
     ],
     "env": {
-        "USER": {
+        "USERNAME": {
             "description": "Proxy username",
             "required": false
         },
-        "PASS": {
+        "PASSWORD": {
             "description": "Proxy password",
             "required": false
         },

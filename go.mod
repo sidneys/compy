@@ -1,6 +1,6 @@
 module github.com/barnacs/compy
 
-go 1.14
+go 1.13
 
 require (
 	github.com/chai2010/webp v1.1.0
